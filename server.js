@@ -1,13 +1,15 @@
 const express = require('express')
 const app = express();
+const userRoutes = require('./routes/UserRoutes')
 
 const rooms = ['general', 'tech', 'finance', 'crypto'];
 const cors = require('cors');
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+app.use('/users', userRoutes)
 require('./conection')
 
 const server = require('http').createServer(app);
