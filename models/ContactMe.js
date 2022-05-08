@@ -1,13 +1,11 @@
 const mongoose = require('mongoose')
 
-const ContactSchema = new mongoose.Schema({
+const MailSchema = new mongoose.Schema({
     email: {
         type: String,
         lowercase: true,
-        unique: true,
         required: [true, 'Can not be blank'],
         index: true,
-        validate: [isEmail, 'Invalid email']
     },
     message: {
         type: String,
@@ -16,6 +14,6 @@ const ContactSchema = new mongoose.Schema({
 })
 
 // USER VARIABLE SIMPLIFY
-const ContactMe = mongoose.model('Contact', ContactSchema)
+const Mail = mongoose.model('Mail', MailSchema)
 
-module.exports = ContactMe
+module.exports = Mail

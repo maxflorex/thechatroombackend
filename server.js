@@ -5,6 +5,7 @@ const Message = require('./models/Message')
 const rooms = ['🗣️ general', '🤖 tech', '💸 finance', '🧑‍💻 crypto'];
 const cors = require('cors');
 const User = require('./models/User');
+const Mail = require('./models/ContactMe')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -27,6 +28,7 @@ app.get('/rooms', (req, res) => {
     res.json(rooms)
 })
 
+// GET LAST MESSAGES PER EACH ROOM
 const getLastMessagesFromRoom = async (room) => {
     let roomMessages = await Message.aggregate([
         { $match: { to: room } },
@@ -35,7 +37,7 @@ const getLastMessagesFromRoom = async (room) => {
     return roomMessages
 }
 
-// ORDER BY DATE
+// ORDER MESSAGES BY DATE
 const sortRoomMessagesByDate = (messages) => {
     return messages.sort(function (a, b) {
         let date1 = a._id.split('/');
@@ -51,7 +53,6 @@ const sortRoomMessagesByDate = (messages) => {
 
 // SOCKET CONNECTION
 io.on('connection', (socket) => {
-
 
     socket.on('new-user', async () => {
         const members = await User.find();
@@ -97,6 +98,9 @@ io.on('connection', (socket) => {
 
 })
 
+
+
+//  PORT LISTENER
 server.listen(PORT, () => {
     console.log('Listening to port', PORT)
 }) 
