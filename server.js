@@ -5,13 +5,13 @@ const Message = require('./models/Message')
 const rooms = ['🗣️ general', '🤖 tech', '💸 finance', '🧑‍💻 crypto'];
 const cors = require('cors');
 const User = require('./models/User');
-const Mail = require('./models/ContactMe')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
 app.use('/users', userRoutes)
+app.use('/contact', userRoutes)
 require('./conection')
 
 const server = require('http').createServer(app);

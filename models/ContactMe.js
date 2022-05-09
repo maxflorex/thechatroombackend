@@ -4,12 +4,12 @@ const MailSchema = new mongoose.Schema({
     email: {
         type: String,
         lowercase: true,
-        required: [true, 'Can not be blank'],
+        required: true,
         index: true,
     },
     message: {
         type: String,
-        required: [true, 'Can not be blank']
+        required: true,
     }
 })
 

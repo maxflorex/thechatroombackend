@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User.js')
-const Message = require('../models/Message')
+const Mail = require('../models/ContactMe.js');
 
 // CREATING USER
 router.post('/', async (req, res) => {
@@ -33,17 +33,17 @@ router.post('/login', async (req, res) => {
         res.status(400).json(error.message)
     }
 })
-
-// CONTACT ME - THANK YOU
+// SEND MESSAGE
 router.post('/contact', async (req, res) => {
     try {
-        const { email, message } = req.body;
-        console.log(req.body)
-        const newMessage = await Message.create({ email, message })
-        res.status(201).json(newMessage)
+        const { email, password } = req.body;
+        const mail = await Mail.create(email, password);
+        res.status(200).json(mail);
     } catch (error) {
-        console.log(error)
+        res.status(400).json(error.message)
     }
 })
+
+
 
 module.exports = router
