@@ -15,7 +15,6 @@ app.use('/contact', userRoutes)
 require('./conection')
 
 const server = require('http').createServer(app);
-const PORT = 5001;
 const io = require('socket.io')(server, {
     cors: {
         origin: 'http://localhost:3000',
@@ -101,6 +100,6 @@ io.on('connection', (socket) => {
 
 
 //  PORT LISTENER
-server.listen(PORT, () => {
+server.listen(process.env.PORT || 5001, () => {
     console.log('Listening to port', PORT)
 }) 
