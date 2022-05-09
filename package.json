@@ -2,6 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "17.6.0",
+    "yarn": "1.22.17",
+    "npm": "8.5.2"
+  },
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
